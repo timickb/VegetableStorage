@@ -12,10 +12,12 @@
         </e>
         <e p="Exceptions" t="Include">
           <e p="BoxAddException.cs" t="Include" />
+          <e p="ContainerNotFoundException.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="StorageCreator.cs" t="Include" />
         <e p="StorageLoader.cs" t="Include" />
+        <e p="StorageWriter.cs" t="Include" />
         <e p="VegetableStorage.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">

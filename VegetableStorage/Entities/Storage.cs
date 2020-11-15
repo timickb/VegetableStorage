@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using VegetableStorage.Exceptions;
 
 namespace VegetableStorage.Entities
 {
@@ -9,6 +11,7 @@ namespace VegetableStorage.Entities
         
         public int Capacity { get; }
         public int Price { get; }
+        public int Fullness => _conts.Count;
         public string Name { get; }
 
         public Storage(string name, int capacity, int price)
@@ -35,22 +38,20 @@ namespace VegetableStorage.Entities
         }
         
         /// <summary>
-        /// Удаляет из хранилища контейнер по
-        /// его хронологическому порядковому номеру.
+        /// Удаляет контейнер по его
+        /// идентификатору.
         /// </summary>
-        /// <param name="index">Порядковый номер.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Исключение выбрасывается, когда
-        /// контейнера с указанным порядковым номером не существует.</exception>
-        public void RemoveContainerByIndex(int index)
+        /// <param name="id">Идентификатор.</param>
+        /// <exception cref="ContainerNotFoundException">Исключение выбрасывается,
+        /// когда контейнера с данным идентификатром не существует.</exception>
+        public void RemoveContainerById(string id)
         {
-            try
+            foreach (var cont in _conts.Where(cont => cont.Id == id))
             {
-                _conts.RemoveAt(index);
+                _conts.Remove(cont);
+                return;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            throw new ContainerNotFoundException();
         }
 
     }

@@ -10,12 +10,15 @@ namespace VegetableStorage
         private readonly int _maxWeight;
         private readonly double _integrity;
         private List<Box> _boxes;
-        public int MaxWeight => _maxWeight;
-
-        public int TotalWeight => _boxes.Sum(box => box.Weight);
         
-        public Container()
+        public string Id { get; }
+        public int MaxWeight => _maxWeight;
+        public int TotalWeight => _boxes.Sum(box => box.Weight);
+        public double TotalValue => _boxes.Sum(box => box.TotalPrice);
+
+        public Container(string id)
         {
+            Id = id;
             var rnd = new Random();
             // Максимальная масса хранимых ящиков - случайное число из [50, 1000].
             _maxWeight = rnd.Next(50, 1001);
@@ -28,11 +31,10 @@ namespace VegetableStorage
         public void AddBox(Box box)
         {
             if (TotalWeight + box.Weight > MaxWeight) throw new BoxAddException();
-            
+
             // Умножаем стоимость ящика на коэффициент целостности данного контейнера.
             box.PriceForKilo *= _integrity;
             _boxes.Add(box);
         }
-        
     }
 }

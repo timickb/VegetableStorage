@@ -13,17 +13,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="third commit">
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" afterDir="false" />
+    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="fourth commit">
+      <change afterPath="$PROJECT_DIR$/VegetableStorage/Exceptions/ContainerNotFoundException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/CommandHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Commands/Help.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Commands/StorageList.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/ICommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +42,15 @@
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/StorageList.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/Help.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/BoxAddException.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/ContainerNotFoundException.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" />
       </list>
     </option>
   </component>
@@ -70,6 +69,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -102,7 +102,7 @@
       <updated>1605277205675</updated>
       <workItem from="1605277246805" duration="1618000" />
       <workItem from="1605361147300" duration="13250000" />
-      <workItem from="1605389258833" duration="8504000" />
+      <workItem from="1605389258833" duration="12929000" />
     </task>
     <task id="LOCAL-00001" summary="third commit">
       <created>1605450732747</created>
@@ -111,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605450732747</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fourth commit">
+      <created>1605475535159</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605475535159</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,29 +141,34 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="third commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="third commit" />
+    <MESSAGE value="fourth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fourth commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1864" height="284" key="GridCell.Tab.0.bottom" timestamp="1605475017914">
+    <state width="1864" height="272" key="GridCell.Tab.0.bottom" timestamp="1605478675312">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605475017914" />
-    <state width="1864" height="284" key="GridCell.Tab.0.center" timestamp="1605475017913">
+    <state width="1864" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675312" />
+    <state width="1864" height="272" key="GridCell.Tab.0.center" timestamp="1605478675311">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="284" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605475017913" />
-    <state width="1864" height="284" key="GridCell.Tab.0.left" timestamp="1605475017912">
+    <state width="1864" height="272" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675311" />
+    <state width="1864" height="272" key="GridCell.Tab.0.left" timestamp="1605478675310">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="284" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605475017912" />
-    <state width="1864" height="284" key="GridCell.Tab.0.right" timestamp="1605475017913">
+    <state width="1864" height="272" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675310" />
+    <state width="1864" height="272" key="GridCell.Tab.0.right" timestamp="1605478675311">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="284" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605475017913" />
+    <state width="1864" height="272" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675311" />
     <state x="764" y="230" key="RiderGenerateDialog" timestamp="1605387958413">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="764" y="230" key="RiderGenerateDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1605387958413" />
+    <state x="332" y="69" key="SettingsEditor" timestamp="1605479778960">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="332" y="69" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1605479778960" />
     <state x="455" y="194" width="1000" height="648" key="Vcs.Push.Dialog.v2" timestamp="1605450734775">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
