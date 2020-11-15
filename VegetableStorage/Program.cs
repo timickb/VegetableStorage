@@ -4,6 +4,10 @@ using VegetableStorage.Entities;
 
 namespace VegetableStorage
 {
+    
+    /// <summary>
+    /// Склад овощей.
+    /// </summary>
     internal static class Program
     {
         public const string ExitCommand = "exit";
@@ -14,24 +18,39 @@ namespace VegetableStorage
         
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("==> Овощной склад (в перспективе - менеджер овощных складов) <==");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Введите help для получения справки.");
-            Console.WriteLine("Введите create для создания склада.");
-
-            // Основной цикл программы. Запрос ввода команды от пользователя.
-            var handler = new CommandHandler();
-            string userInput;
             do
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("===> Склад овощей <===");
+                Console.WriteLine();
+                Console.WriteLine("Выберите опцию:");
+                Console.WriteLine("1 - ввести параметры склада в консоли,");
+                Console.WriteLine("2 - загрузить информацию из json файла,");
+                Console.WriteLine("3 - отстаньте, хочу выйти.");
                 Console.Write("> ");
-                userInput = Console.ReadLine();
-                // Отправляем то, что ввел пользователь, обработчику команд
-                // и возвращаем результат.
-                Console.WriteLine(handler.Execute(userInput));
-            } while (userInput != ExitCommand);
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        new StorageCreator();
+                        break;
+                    case "2":
+                        Console.WriteLine();
+                        break;
+                    case "3":
+                        Console.WriteLine("Всего доброго!");
+                        return;
+                    default:
+                        Console.WriteLine("Нет такой опции, попробуйте еще раз.");
+                        continue;
+                }
+
+                Console.Write("Повторить работу программы? [Y/n] ");
+                var userInput = Console.ReadLine();
+                if (userInput == "Y" || userInput == "y" || userInput == "Yes")
+                {
+                    continue;
+                }
+                break;
+            } while (true);
         }
     }
 }
