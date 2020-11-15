@@ -1,4 +1,6 @@
-﻿namespace VegetableStorage.Commands
+﻿using VegetableStorage.Entities;
+
+namespace VegetableStorage.Commands
 {
     public class CreateStorage : ICommand
     {

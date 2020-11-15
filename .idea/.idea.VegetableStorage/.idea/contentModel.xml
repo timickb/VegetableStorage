@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\desktop\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\desktop\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_VegetableStorage.-1708731499.00" t="ExcludeRecursive" />
-    <e p="C:\Users\desktop\RiderProjects\VegetableStorage" t="IncludeFlat">
-      <e p="packages" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_VegetableStorage.847933454.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="VegetableStorage" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="CommandHandler.cs" t="Include" />
         <e p="Commands" t="Include">
           <e p="CreateStorage.cs" t="Include" />
@@ -18,7 +16,13 @@
           <e p="Container.cs" t="Include" />
           <e p="Storage.cs" t="Include" />
         </e>
+        <e p="Exceptions" t="Include">
+          <e p="BoxAddException.cs" t="Include" />
+        </e>
         <e p="ICommand.cs" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="VegetableStorage.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -26,10 +30,9 @@
             </e>
           </e>
         </e>
-        <e p="Program.cs" t="Include" />
-        <e p="VegetableStorage.csproj" t="IncludeRecursive" />
       </e>
       <e p="VegetableStorage.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
 </project>

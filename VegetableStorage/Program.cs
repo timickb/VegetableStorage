@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using VegetableStorage.Entities;
 
 namespace VegetableStorage
 {
@@ -9,7 +10,7 @@ namespace VegetableStorage
 
         public const int MaxNameLength = 24;
         
-        public static List<Storage> Storages = new List<Storage>();
+        public static readonly List<Storage> Storages = new List<Storage>();
         
         public static void Main(string[] args)
         {

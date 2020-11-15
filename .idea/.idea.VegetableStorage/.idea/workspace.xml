@@ -14,18 +14,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Commands/Help.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Commands/StorageList.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VegetableStorage/Exceptions/BoxAddException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Box.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/ICommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/CommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VegetableStorage/Storage.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +37,17 @@
         <option value="$PROJECT_DIR$/VegetableStorage/Container.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Box.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Storage.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/List.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/ICommand.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/CommandHandler.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/StorageList.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/Help.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/BoxAddException.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
       </list>
     </option>
   </component>
@@ -61,6 +60,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -93,6 +98,7 @@
       <updated>1605277205675</updated>
       <workItem from="1605277246805" duration="1618000" />
       <workItem from="1605361147300" duration="13250000" />
+      <workItem from="1605389258833" duration="4587000" />
     </task>
     <servers />
   </component>

@@ -2,17 +2,17 @@
 {
     public class Box
     {
-        
-        private readonly int _priceForKilo;
 
-        public int PriceForKilo => _priceForKilo;
+        public double PriceForKilo { get; set; }
 
         public int Weight { get; }
 
-        public Box(int weight, int priceForKilo)
+        public double TotalPrice => PriceForKilo * Weight;
+
+        public Box(int weight, double priceForKilo)
         {
             Weight = weight;
-            _priceForKilo = priceForKilo;
+            PriceForKilo = priceForKilo;
         }
 
     }
