@@ -36,5 +36,10 @@ namespace VegetableStorage
             box.PriceForKilo *= _integrity;
             _boxes.Add(box);
         }
+
+        public List<Box> GetBoxesList()
+        {
+            return _boxes;
+        }
     }
 }

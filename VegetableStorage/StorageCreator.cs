@@ -51,8 +51,8 @@ namespace VegetableStorage
             
             // Запрашиваем у пользователя действия.
             RequestActions();
-            // Выводим результат и педлагаем сохранить его в файл.
-            HandleResult();
+            var writer = new StorageWriter(_storage);
+            writer.WriteToConsole();
         }
 
         /// <summary>
@@ -179,16 +179,6 @@ namespace VegetableStorage
             {
                 Console.WriteLine(e.Message);
             }
-        }
-
-        private void HandleResult()
-        {
-            Console.Clear();
-            Console.WriteLine("===========================");
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Информация о складе:");
-            Console.WriteLine($"Число контейнеров: {_storage.Fullness}");
         }
     }
 }

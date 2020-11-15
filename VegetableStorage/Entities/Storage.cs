@@ -54,5 +54,10 @@ namespace VegetableStorage.Entities
             throw new ContainerNotFoundException();
         }
 
+        public List<Container> GetContainersList()
+        {
+            return _conts;
+        }
+
     }
 }
