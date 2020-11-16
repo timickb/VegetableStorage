@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using VegetableStorage.Exceptions;
 
 namespace VegetableStorage.Entities
 {
     public class Storage
     {
+        
+        [JsonProperty("Name")]
         public string Name { get; }
+        
+        [JsonProperty("Capacity")]
         public int Capacity { get; }
+        
+        [JsonProperty("Price")]
         public int Price { get; }
         public int Fullness => Containers.Count;
         public List<Container> Containers { get; set; }
 
         // Счетчик идентификаторов для создания новых контейнеров.
         private int _idCounter;
-
+        
+        [JsonConstructor]
         public Storage(string name, int capacity, int price)
         {
             Name = name;
@@ -38,7 +47,7 @@ namespace VegetableStorage.Entities
             {
                 Containers.RemoveAt(0);
             }
-
+            
             Containers.Add(c);
         }
 
@@ -71,27 +80,64 @@ namespace VegetableStorage.Entities
         /// <returns>Результат выполнения операции.</returns>
         public bool ApplyAction(Operation act, List<Container> conts)
         {
-            if (act.Name == "add")
+            try
             {
-                if (act.Argument == string.Empty) return false;
-                // Находим контейнер с указанным айдишником.
-                Container cont = null;
-                foreach (var c in conts.Where(c => c.Id == act.Argument))
+                if (act.Name == "add")
                 {
-                    cont = c;
+                    if (act.Argument == string.Empty) return false;
+                    // Находим контейнер с указанным айдишником.
+                    Container cont = null;
+                    foreach (var c in conts.Where(c => c.Id == act.Argument))
+                    {
+                        cont = c;
+                    }
+
+                    // Если такого контейнера нет в списке.
+                    if (cont == null) return false;
+                    // Если такой контейнер уже есть на складе - до свидания.
+                    if (Containers.Any(c => c.Id == cont.Id))
+                    {
+                        return false;
+                    }
+
+                    // Если контейнер не влезет - до свидания.
+                    if (Fullness >= Capacity) return false;
+                    // Проверим все значения на "положительность".
+                    if (cont.MaxWeight <= 0) return false;
+                    if (!cont.Boxes.All(box => box.Weight > 0 && box.PriceForKilo > 0))
+                    {
+                        return false;
+                    }
+
+                    // Удаляем ящики с конца до тех пор, пока они не станут вмещаться в контейнер.
+                    while (cont.TotalWeight > cont.MaxWeight && cont.Boxes.Count > 0)
+                    {
+                        cont.Boxes.RemoveAt(cont.Boxes.Count - 1);
+                    }
+
+                    // Проверим рентабельность хранения контейнера.
+                    if (cont.TotalValue <= Price) return false;
+                    
+                    AddContainer(cont);
+                    return true;
                 }
-                // Если такого контейнера нет в списке.
-                if (cont == null) return false;
-                // Если такой контейнер уже есть на складе - до свидания.
-                foreach (var c in Containers)
+
+                if (act.Name == "remove")
                 {
-                    if (c.Id == cont.Id)
+                    try
+                    {
+                        RemoveContainerById(act.Argument);
+                        return true;
+                    }
+                    catch (ContainerNotFoundException)
                     {
                         return false;
                     }
                 }
-
-                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
             return false;

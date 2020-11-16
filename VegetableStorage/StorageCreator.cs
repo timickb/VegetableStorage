@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using VegetableStorage.Entities;
 using VegetableStorage.Exceptions;
 
@@ -15,10 +16,7 @@ namespace VegetableStorage
     public class StorageCreator
     {
         private Storage _storage;
-
-        // Счетчик идентификаторов для контейнеров, инкрементируется при
-        // каждом добавлении контейнера.
-        private int _idCounter;
+        private List<Operation> _actions;
 
         /// <summary>
         /// При создании объекта
@@ -48,7 +46,6 @@ namespace VegetableStorage
 
             _storage = new Storage("default", capacity, price);
             Console.WriteLine("Склад успешно создан!");
-            _idCounter = 0;
 
             // Запрашиваем у пользователя действия.
             RequestActions();
@@ -83,6 +80,33 @@ namespace VegetableStorage
                     }
                 } while (true);
             }
+            // Запрос на сохранение списка действий в файл.
+            if (Program.RequestAgreement("Хотите записать список ваших действий в файл?"))
+            {
+                do
+                {
+                    Console.WriteLine("Введите полный путь к файлу:");
+                    var path = Path.GetFullPath(Console.ReadLine() ?? string.Empty);
+                    try
+                    {
+                        var sw  = new StreamWriter(path);
+                        sw.WriteLine(JsonConvert.SerializeObject(_actions));
+                        Console.WriteLine("Информация успешно записана!");
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        Console.WriteLine("Ошибка при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine("Ошибка доступа при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                } while (true);
+            }
+
         }
 
         /// <summary>
@@ -112,6 +136,7 @@ namespace VegetableStorage
                 }
 
                 _storage.ApplyAction(action);
+                _actions.Add(action);
                 actionIterator++;
                 
             } while (true);

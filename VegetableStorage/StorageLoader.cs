@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.Json;
 using Newtonsoft.Json;
 using VegetableStorage.Entities;
+using JsonException = Newtonsoft.Json.JsonException;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace VegetableStorage
 {
@@ -12,12 +15,19 @@ namespace VegetableStorage
     {
         private Storage _storage;
         private List<Container> _containers;
+        private JsonSerializerSettings settings;
+
         public StorageLoader()
         {
+            // Сообщаем компилятору, что отсутствие некоторых свойств
+            // при десериализации json нужно считать за ошибку.
+            settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+            
             RequestStorageDescription();
             RequestContainersList();
             RequestActionsList();
-            
+
             // Вывод результата.
             var writer = new StorageWriter(_storage);
             writer.WriteToConsole();
@@ -59,38 +69,34 @@ namespace VegetableStorage
                 try
                 {
                     var sr = new StreamReader(path);
-                    storage = JsonConvert.DeserializeObject<Storage>(sr.ReadToEnd());
+                    storage = JsonConvert.DeserializeObject<Storage>(sr.ReadToEnd(), settings);
+                    if (storage?.Containers.Count > 0)
+                    {
+                        Error("В файле содержится лишняя информация - список контейнеров. Попробуйте другой файл.");
+                        continue;
+                    }
+
                     break;
                 }
                 catch (IOException)
                 {
-                    Console.WriteLine("Ошибка чтения файла.");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Ошибка чтения файла.");
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Console.WriteLine("Ошибка доступа к файлу.");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Ошибка доступа к файлу.");
                 }
                 catch (JsonReaderException)
                 {
-                    Console.WriteLine("Файл не соответствует формату. Смотрите образец в examples/storage.json");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Файл не соответствует формату. Смотрите образец в examples/storage.json");
+                }
+                catch (JsonSerializationException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/storage.json");
+                }
+                catch (JsonException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/storage.json");
                 }
             } while (true);
 
@@ -108,7 +114,7 @@ namespace VegetableStorage
                 try
                 {
                     var sr = new StreamReader(path);
-                    list = JsonConvert.DeserializeObject<List<Container>>(sr.ReadToEnd());
+                    list = JsonConvert.DeserializeObject<List<Container>>(sr.ReadToEnd(), settings);
                     break;
                 }
                 catch (IOException)
@@ -123,27 +129,24 @@ namespace VegetableStorage
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Console.WriteLine("Ошибка доступа к файлу.");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Ошибка доступа к файлу.");
                 }
                 catch (JsonReaderException)
                 {
-                    Console.WriteLine("Файл не соответствует формату. Смотрите образец в examples/containers.json");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Файл не соответствует формату. Смотрите образец в examples/containers.json");
+                }
+                catch (JsonSerializationException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/containers.json");
+                }
+                catch (JsonException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/containers.json");
                 }
             } while (true);
+
             // Закидываем контейнеры на склад.
-            _containers = _containers;
+            _containers = list;
         }
 
         private void RequestActionsList()
@@ -156,65 +159,51 @@ namespace VegetableStorage
                 try
                 {
                     var sr = new StreamReader(path);
-                    list = JsonConvert.DeserializeObject<List<Operation>>(sr.ReadToEnd());
+                    list = JsonConvert.DeserializeObject<List<Operation>>(sr.ReadToEnd(), settings);
                     break;
                 }
                 catch (IOException)
                 {
-                    Console.WriteLine("Ошибка чтения файла.");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Ошибка чтения файла.");
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Console.WriteLine("Ошибка доступа к файлу.");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Ошибка доступа к файлу.");
                 }
                 catch (JsonReaderException)
                 {
-                    Console.WriteLine("Файл не соответствует формату. Смотрите образец в examples/actions.json");
-                    // Если пользователю надоест вводить неправильный путь - у него есть возможность
-                    // прервать выполнение программы.
-                    if (!Program.RequestAgreement("Повторить операцию?"))
-                    {
-                        Environment.Exit(1);
-                    }
+                    Error("Файл не соответствует формату. Смотрите образец в examples/actions.json");
+                }
+                catch (JsonSerializationException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/actions.json");
+                }
+                catch (JsonException)
+                {
+                    Error("Файл не соответствует формату. Смотрите образец в examples/actions.json");
                 }
             } while (true);
-            
+
             // Поочередно применяем каждое действие ко складу.
-            foreach (var action in list)
+            foreach (var action in list.Where(action => !_storage.ApplyAction(action, _containers)))
             {
-                switch (action.Name)
-                {
-                    case "add":
-                    {
-                        foreach (var cont in _containers.Where(cont => cont.Id == action.Argument))
-                        {
-                            _storage.AddContainer(cont);
-                        }
+                Console.WriteLine($"(!) Контейнер {action.Argument} не может быть добавлен на склад.");
+            }
+        }
 
-                        break;
-                    }
-                    case "remove":
-                    {
-                        foreach (var cont in _containers.Where(cont => cont.Id == action.Argument))
-                        {
-                            _storage.RemoveContainerById(cont.Id);
-                        }
-
-                        break;
-                    }
-                }
+        /// <summary>
+        /// Сообщение об ошибке с предложением
+        /// повторить ввод данных>.
+        /// </summary>
+        /// <param name="message">Сообщение.</param>
+        private void Error(string message)
+        {
+            Console.WriteLine(message);
+            // Если пользователю надоест вводить неправильный путь - у него есть возможность
+            // прервать выполнение программы.
+            if (!Program.RequestAgreement("Повторить операцию?"))
+            {
+                Environment.Exit(18);
             }
         }
     }

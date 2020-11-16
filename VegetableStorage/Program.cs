@@ -5,11 +5,16 @@
  * положил(а) сюда README.md, возможно,
  * будет полезно прочитать при возникновении
  * вопросов.
+ * Доп. функционал - возможность записать в файл
+ * не только состояние склада, но и список действий,
+ * совершенных пользователем над этим складом.
  */
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using VegetableStorage.Entities;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace VegetableStorage
 {
@@ -22,6 +27,21 @@ namespace VegetableStorage
 
         public static void Main(string[] args)
         {
+            // Недопиленный функционал.
+            if (args.Length > 1)
+            {
+                switch (args[1])
+                {
+                    case "Russian":
+                        Lang.CurrentLang = "Russian";
+                        break;
+                    case "English":
+                        Lang.CurrentLang = "English";
+                        break;
+                }
+            }
+            
+            // Основной цикл программы.
             do
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -49,7 +69,7 @@ namespace VegetableStorage
                         Console.WriteLine("Нет такой опции, попробуйте еще раз.");
                         continue;
                 }
-                
+
                 if (RequestAgreement("Повторить работу программы?"))
                 {
                     continue;
@@ -58,7 +78,7 @@ namespace VegetableStorage
                 break;
             } while (true);
         }
-        
+
         /// <summary>
         /// Вспомогательная функция.
         /// Запрашивает у пользователя некоторый выбор

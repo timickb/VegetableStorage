@@ -4,7 +4,11 @@ namespace VegetableStorage.Entities
 {
     public class Operation
     {
+        
+        [JsonProperty("Name")]
         public string Name { get; }
+        
+        [JsonProperty("Argument")]
         public string Argument { get; }
         
         [JsonConstructor]
