@@ -4,7 +4,6 @@ using VegetableStorage.Entities;
 
 namespace VegetableStorage
 {
-    
     /// <summary>
     /// Склад овощей.
     /// </summary>
@@ -13,13 +12,14 @@ namespace VegetableStorage
         public const string ExitCommand = "exit";
 
         public const int MaxNameLength = 24;
-        
+
         public static readonly List<Storage> Storages = new List<Storage>();
-        
+
         public static void Main(string[] args)
         {
             do
             {
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("===> Склад овощей <===");
                 Console.WriteLine();
                 Console.WriteLine("Выберите опцию:");
@@ -42,15 +42,31 @@ namespace VegetableStorage
                         Console.WriteLine("Нет такой опции, попробуйте еще раз.");
                         continue;
                 }
-
-                Console.Write("Повторить работу программы? [Y/n] ");
-                var userInput = Console.ReadLine();
-                if (userInput == "Y" || userInput == "y" || userInput == "Yes")
+                
+                if (RequestAgreement("Повторить работу программы?"))
                 {
                     continue;
                 }
+
                 break;
             } while (true);
+        }
+        
+        /// <summary>
+        /// Вспомогательная функция.
+        /// Запрашивает у пользователя некоторый выбор
+        /// из "Да" и "Нет" и возвращает булево
+        /// значение.
+        /// </summary>
+        /// <param name="message">Вопрос, который выводится пользователю.</param>
+        /// <returns>true - пользователь согласен, false - не согласен.</returns>
+        public static bool RequestAgreement(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{message} [Y/n] ");
+            var reaction = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
+            return reaction == "Y" || reaction == "y" || reaction == "yes" || reaction == "Yes";
         }
     }
 }

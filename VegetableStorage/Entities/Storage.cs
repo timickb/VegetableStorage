@@ -7,19 +7,18 @@ namespace VegetableStorage.Entities
 {
     public class Storage
     {
-        private List<Container> _conts;
-        
+        public string Name { get; }
         public int Capacity { get; }
         public int Price { get; }
-        public int Fullness => _conts.Count;
-        public string Name { get; }
+        public int Fullness => Containers.Count;
+        public List<Container> Containers { get; }
 
         public Storage(string name, int capacity, int price)
         {
             Name = name;
             Capacity = capacity;
             Price = price;
-            _conts = new List<Container>();
+            Containers = new List<Container>();
         }
         
         /// <summary>
@@ -30,11 +29,11 @@ namespace VegetableStorage.Entities
         /// <param name="c">Контейнер</param>
         public void AddContainer(Container c)
         {
-            if (_conts.Count >= Capacity)
+            if (Containers.Count >= Capacity)
             {
-                _conts.RemoveAt(0);
+                Containers.RemoveAt(0);
             }
-            _conts.Add(c);
+            Containers.Add(c);
         }
         
         /// <summary>
@@ -46,17 +45,12 @@ namespace VegetableStorage.Entities
         /// когда контейнера с данным идентификатром не существует.</exception>
         public void RemoveContainerById(string id)
         {
-            foreach (var cont in _conts.Where(cont => cont.Id == id))
+            foreach (var cont in Containers.Where(cont => cont.Id == id))
             {
-                _conts.Remove(cont);
+                Containers.Remove(cont);
                 return;
             }
             throw new ContainerNotFoundException();
-        }
-
-        public List<Container> GetContainersList()
-        {
-            return _conts;
         }
 
     }

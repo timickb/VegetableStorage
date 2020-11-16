@@ -13,12 +13,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="fifth commit">
+    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="sixth commit">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/VegetableStorage.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/VegetableStorage.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,13 +44,13 @@
         <option value="$PROJECT_DIR$/VegetableStorage/Commands/CreateStorage.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/BoxAddException.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/ContainerNotFoundException.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
       </list>
     </option>
   </component>
@@ -100,7 +102,8 @@
       <updated>1605277205675</updated>
       <workItem from="1605277246805" duration="1618000" />
       <workItem from="1605361147300" duration="13250000" />
-      <workItem from="1605389258833" duration="13825000" />
+      <workItem from="1605389258833" duration="14655000" />
+      <workItem from="1605520393248" duration="1172000" />
     </task>
     <task id="LOCAL-00001" summary="third commit">
       <created>1605450732747</created>
@@ -123,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605479955426</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="sixth commit">
+      <created>1605480717970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605480717970</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,25 +158,26 @@
     <MESSAGE value="third commit" />
     <MESSAGE value="fourth commit" />
     <MESSAGE value="fifth commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="fifth commit" />
+    <MESSAGE value="sixth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="sixth commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1864" height="272" key="GridCell.Tab.0.bottom" timestamp="1605478675312">
+    <state width="1864" height="272" key="GridCell.Tab.0.bottom" timestamp="1605481506032">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675312" />
-    <state width="1864" height="272" key="GridCell.Tab.0.center" timestamp="1605478675311">
+    <state width="1864" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605481506032" />
+    <state width="1864" height="272" key="GridCell.Tab.0.center" timestamp="1605481506031">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="272" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675311" />
-    <state width="1864" height="272" key="GridCell.Tab.0.left" timestamp="1605478675310">
+    <state width="1864" height="272" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605481506031" />
+    <state width="1864" height="272" key="GridCell.Tab.0.left" timestamp="1605481506029">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="272" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675310" />
-    <state width="1864" height="272" key="GridCell.Tab.0.right" timestamp="1605478675311">
+    <state width="1864" height="272" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605481506029" />
+    <state width="1864" height="272" key="GridCell.Tab.0.right" timestamp="1605481506032">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1864" height="272" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605478675311" />
+    <state width="1864" height="272" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605481506032" />
     <state x="764" y="230" key="RiderGenerateDialog" timestamp="1605387958413">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -175,9 +186,9 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="332" y="69" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1605479778960" />
-    <state x="455" y="170" width="1000" height="648" key="Vcs.Push.Dialog.v2" timestamp="1605479957613">
+    <state x="455" y="146" width="1000" height="648" key="Vcs.Push.Dialog.v2" timestamp="1605480731302">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="455" y="170" width="1000" height="648" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1605479957613" />
+    <state x="455" y="146" width="1000" height="648" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1605480731302" />
   </component>
 </project>

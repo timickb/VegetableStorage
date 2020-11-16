@@ -9,12 +9,12 @@ namespace VegetableStorage
     {
         private readonly int _maxWeight;
         private readonly double _integrity;
-        private List<Box> _boxes;
+        public List<Box> Boxes { get; }
         
         public string Id { get; }
         public int MaxWeight => _maxWeight;
-        public int TotalWeight => _boxes.Sum(box => box.Weight);
-        public double TotalValue => _boxes.Sum(box => box.TotalPrice);
+        public int TotalWeight => Boxes.Sum(box => box.Weight);
+        public double TotalValue => Boxes.Sum(box => box.TotalPrice);
 
         public Container(string id)
         {
@@ -22,7 +22,7 @@ namespace VegetableStorage
             var rnd = new Random();
             // Максимальная масса хранимых ящиков - случайное число из [50, 1000].
             _maxWeight = rnd.Next(50, 1001);
-            _boxes = new List<Box>();
+            Boxes = new List<Box>();
 
             // Рассчитываю степень целостности контейнера (1 - <степень_повреждения>).
             _integrity = 1 - (rnd.NextDouble() * 0.5);
@@ -34,12 +34,7 @@ namespace VegetableStorage
 
             // Умножаем стоимость ящика на коэффициент целостности данного контейнера.
             box.PriceForKilo *= _integrity;
-            _boxes.Add(box);
-        }
-
-        public List<Box> GetBoxesList()
-        {
-            return _boxes;
+            Boxes.Add(box);
         }
     }
 }

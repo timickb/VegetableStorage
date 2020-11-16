@@ -51,8 +51,14 @@ namespace VegetableStorage
             
             // Запрашиваем у пользователя действия.
             RequestActions();
+            // Сохранение результата.
             var writer = new StorageWriter(_storage);
             writer.WriteToConsole();
+            Console.WriteLine();
+            if (Program.RequestAgreement("Хотите записать результат в файл?"))
+            {
+                Console.WriteLine("Введите полный путь к файлу:");
+            }
         }
 
         /// <summary>

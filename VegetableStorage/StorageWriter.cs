@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using Newtonsoft.Json;
 using VegetableStorage.Entities;
 
 namespace VegetableStorage
@@ -18,25 +20,38 @@ namespace VegetableStorage
             Console.WriteLine($"-> Число контейнеров: {_storage.Fullness}");
             Console.WriteLine($"-> Цена хранения контейнера: {_storage.Price}");
             Console.WriteLine($"-> Вместимость склада: {_storage.Capacity}");
-            Console.WriteLine();
             Console.WriteLine("-> Контейнеры:");
-            foreach (var cont in _storage.GetContainersList())
+            foreach (var cont in _storage.Containers)
             {
-                Console.WriteLine($"-> -> {cont.Id}:");
-                Console.WriteLine($"-> -> Суммарная масса ящиков: {cont.TotalWeight}");
-                Console.WriteLine($"-> -> Суммарная ценность ящиков: {cont.TotalValue}");
-                Console.WriteLine($"-> -> Ящики:");
-                foreach (var box in cont.GetBoxesList())
+                Console.WriteLine($"      {cont.Id}:");
+                Console.WriteLine($"      Суммарная масса ящиков: {cont.TotalWeight}");
+                Console.WriteLine($"      Суммарная ценность ящиков: {cont.TotalValue}");
+                Console.WriteLine($"      Ящики:");
+                foreach (var box in cont.Boxes)
                 {
-                    Console.WriteLine($"-> -> -> {box.Weight} кг; {box.PriceForKilo} тугриков за кг.");
+                    Console.WriteLine($"         {box.Weight} кг; {box.PriceForKilo} тугриков за кг.");
                 }
             }
             
         }
 
-        public void WriteToFile(string filename)
+        public void WriteToFile(string path)
         {
-            
+            try
+            {
+                var sw = new StreamWriter(path, false, System.Text.Encoding.UTF8);
+                sw.WriteLine(JsonConvert.SerializeObject(_storage));
+                sw.Flush();
+                sw.Close();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("Невозможно записать информацию в заданный файл.");
+            }
+            catch (IOException)
+            {
+               Console.WriteLine("Невозможно записать информацию в заданный файл."); 
+            }
         }
     }
 }
