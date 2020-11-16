@@ -13,10 +13,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="eighth commit">
+    <list default="true" id="9ed720dc-ef6d-4dd9-99ed-a1ee35066488" name="Default Changelist" comment="ninth commit">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VegetableStorage/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Operation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +45,15 @@
         <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/BoxAddException.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Entities/Box.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Exceptions/ContainerNotFoundException.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Program.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageWriter.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Entities/Action.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/Entities/ActionType.cs" />
-        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Operation.cs" />
         <option value="$PROJECT_DIR$/VegetableStorage/StorageCreator.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/StorageLoader.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Storage.cs" />
+        <option value="$PROJECT_DIR$/VegetableStorage/Entities/Container.cs" />
       </list>
     </option>
   </component>
@@ -102,7 +107,7 @@
       <workItem from="1605361147300" duration="13250000" />
       <workItem from="1605389258833" duration="14655000" />
       <workItem from="1605520393248" duration="1817000" />
-      <workItem from="1605524116276" duration="4214000" />
+      <workItem from="1605524116276" duration="6909000" />
     </task>
     <task id="LOCAL-00001" summary="third commit">
       <created>1605450732747</created>
@@ -146,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605527689302</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ninth commit">
+      <created>1605529055294</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605529055294</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +186,8 @@
     <MESSAGE value="sixth commit" />
     <MESSAGE value="seventh commit" />
     <MESSAGE value="eighth commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="eighth commit" />
+    <MESSAGE value="ninth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="ninth commit" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1864" height="272" key="GridCell.Tab.0.bottom" timestamp="1605481506032">
@@ -205,10 +218,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="0" y="11" width="1920" height="1069" key="VCS.FileHistoryDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1605524750194" />
-    <state x="455" y="98" width="1000" height="648" key="Vcs.Push.Dialog.v2" timestamp="1605527691903">
+    <state x="455" y="74" width="1000" height="648" key="Vcs.Push.Dialog.v2" timestamp="1605529056714">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="455" y="98" width="1000" height="648" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1605527691903" />
+    <state x="455" y="74" width="1000" height="648" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1605529056714" />
     <state x="539" y="45" width="840" height="1034" key="search.everywhere.popup" timestamp="1605524911735">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using VegetableStorage.Entities;
 using VegetableStorage.Exceptions;
-using Action = VegetableStorage.Entities.Action;
 
 namespace VegetableStorage
 {
@@ -93,7 +92,8 @@ namespace VegetableStorage
         private void RequestActions()
         {
             Console.WriteLine("Вы можете совершать над складом два вида действий:");
-            Console.WriteLine("-> add - добавить новый контейнер.");
+            Console.WriteLine("-> add [id] - добавить новый контейнер. Опциально указывается идентификатор -");
+            Console.WriteLine("произвольная строка длиной до 10 символов.");
             Console.WriteLine("-> remove <id> - удалить контейнер с индентификатором <id>.");
             Console.WriteLine("Чтобы завершить или прервать ввод действий, напишите exit.");
 
@@ -103,8 +103,8 @@ namespace VegetableStorage
                 Console.Write($"Действие #{actionIterator}> ");
                 var userInput = Console.ReadLine()?.Trim().Split();
                 var action = userInput?.Length > 1
-                    ? new Action(userInput?[0], userInput?[1])
-                    : new Action(userInput?[0]);
+                    ? new Operation(userInput?[0], userInput?[1])
+                    : new Operation(userInput?[0]);
 
                 if (userInput?[0] == Program.ExitCommand)
                 {

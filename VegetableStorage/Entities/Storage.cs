@@ -60,16 +60,29 @@ namespace VegetableStorage.Entities
             throw new ContainerNotFoundException();
         }
 
-        public void ApplyAction(Action act)
+        /// <summary>
+        /// Применяет ко складу указанное
+        /// действие: добавить контейнер / удалить
+        /// контейнер / получить список контейнеров.
+        /// </summary>
+        /// <param name="act">Действие.</param>
+        public void ApplyAction(Operation act)
         {
             if (act.Name == "add")
             {
+                if (act.Argument != string.Empty && act.Argument.Length > 10)
+                {
+                    Console.WriteLine(
+                        "(!) Недопустимая длина идентификатора. Будет присовен идентификатор по умолчанию.");
+                }
+
                 if (Fullness >= Capacity)
                 {
                     Console.WriteLine("(!) Склад уже содержит максимальное число контейнеров.");
                     Console.WriteLine("При добавлении нового контейнера будет удален самый старый.");
                     Console.WriteLine();
                 }
+
                 // Ввод числа ящиков.
                 Console.WriteLine(
                     "Введите количество ящиков, которые хотите поместить в новый контейнер (от 1 до 20):");
@@ -82,8 +95,19 @@ namespace VegetableStorage.Entities
                     Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
                 } while (true);
 
+                // Если был указан идентификатор в качестве аргумента - используем его,
+                // в противном случае присваиваем идентификатор по умолчанию.
+                Container container;
+                if (act.Argument == string.Empty || act.Argument.Length > 10)
+                {
+                    container = new Container(_idCounter.ToString());
+                }
+                else
+                {
+                    container = new Container(act.Argument);
+                }
+
                 // Ввод информации о ящиках.
-                var container = new Container(_idCounter.ToString());
                 Console.WriteLine($"В каждой из следующих {amount} строк введите через пробел по два целых числа -");
                 Console.WriteLine(
                     "масса ящика в килограммах (от 1 до 100) и цена за килограмм в тугриках (от 1 до 50):");
@@ -127,7 +151,7 @@ namespace VegetableStorage.Entities
 
                 // Добавление нового контейнера.
                 AddContainer(container);
-                Console.WriteLine($"Контейнер успешно добавлен на склад, ему присвоен идентификатор {_idCounter}");
+                Console.WriteLine($"Контейнер успешно добавлен на склад, ему присвоен идентификатор {container.Id}.");
                 _idCounter++;
             }
 
@@ -149,10 +173,14 @@ namespace VegetableStorage.Entities
             }
         }
 
+        /// <summary>
+        /// Строковое представление склада.
+        /// </summary>
+        /// <returns>Строкое представление склада.</returns>
         public override string ToString()
         {
             var sep = Environment.NewLine;
-            var result = $"Информация о складе {Name}:" + sep;
+            var result = $"Склад {Name}:" + sep;
             result += $"-> Число контейнеров: {Fullness}" + sep;
             result += $"-> Цена хранения контейнера: {Price}" + sep;
             result += $"-> Вместимость склада: {Capacity}" + sep;
@@ -162,11 +190,10 @@ namespace VegetableStorage.Entities
                 result += $"      {cont.Id}:" + sep;
                 result += $"      Суммарная масса ящиков: {cont.TotalWeight}" + sep;
                 result += $"      Суммарная ценность ящиков: {cont.TotalValue}" + sep;
-                result += $"      Ящики:" + sep;
-                foreach (var box in cont.Boxes)
-                {
-                    result += $"         {box.Weight} кг; {box.PriceForKilo} тугриков за кг." + sep;
-                }
+                result += "      Ящики:" + sep;
+                result = cont.Boxes.Aggregate(result,
+                    (current, box) =>
+                        current + ($"         {box.Weight} кг; {box.PriceForKilo} тугриков за кг." + sep));
             }
 
             return result;
