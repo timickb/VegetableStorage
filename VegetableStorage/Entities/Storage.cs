@@ -59,17 +59,62 @@ namespace VegetableStorage.Entities
 
             throw new ContainerNotFoundException();
         }
+        
+        /// <summary>
+        /// Применяет ко складу
+        /// указанное действие на основе
+        /// уже существующего списка
+        /// контейнеров.
+        /// </summary>
+        /// <param name="act">Действие.</param>
+        /// <param name="conts">Какой-то список контейнеров.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public bool ApplyAction(Operation act, List<Container> conts)
+        {
+            if (act.Name == "add")
+            {
+                if (act.Argument == string.Empty) return false;
+                // Находим контейнер с указанным айдишником.
+                Container cont = null;
+                foreach (var c in conts.Where(c => c.Id == act.Argument))
+                {
+                    cont = c;
+                }
+                // Если такого контейнера нет в списке.
+                if (cont == null) return false;
+                // Если такой контейнер уже есть на складе - до свидания.
+                foreach (var c in Containers)
+                {
+                    if (c.Id == cont.Id)
+                    {
+                        return false;
+                    }
+                }
 
+                return true;
+            }
+
+            return false;
+        }
+        
         /// <summary>
         /// Применяет ко складу указанное
         /// действие: добавить контейнер / удалить
         /// контейнер / получить список контейнеров.
+        /// При этом новый контейнер создается
+        /// в интерактивном режиме.
         /// </summary>
         /// <param name="act">Действие.</param>
         public void ApplyAction(Operation act)
         {
             if (act.Name == "add")
             {
+                // Если указан идентификатор, контейнер с которым уже существует.
+                if (Containers.Any(cont => cont.Id == act.Argument))
+                {
+                    Console.WriteLine("(x) Контейнер с таким именем уже существует.");
+                    return;
+                }
                 if (act.Argument != string.Empty && act.Argument.Length > 64)
                 {
                     Console.WriteLine(

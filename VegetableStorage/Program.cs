@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Заметка для ревьювера
+ * Шаблоны файлов для загрузки находятся
+ * в директории ../examples,
+ * Кроме того, на всякий случай
+ * положил(а) сюда README.md, возможно,
+ * будет полезно прочитать при возникновении
+ * вопросов.
+ */
+
+using System;
 using System.Collections.Generic;
 using VegetableStorage.Entities;
 
@@ -7,13 +16,9 @@ namespace VegetableStorage
     /// <summary>
     /// Склад овощей.
     /// </summary>
-    internal static class Program
+    public static class Program
     {
         public const string ExitCommand = "exit";
-
-        public const int MaxNameLength = 24;
-
-        public static readonly List<Storage> Storages = new List<Storage>();
 
         public static void Main(string[] args)
         {
@@ -25,7 +30,7 @@ namespace VegetableStorage
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("Выберите опцию:");
                 Console.WriteLine("1 - ввести параметры склада в консоли,");
-                Console.WriteLine("2 - загрузить информацию из json файла,");
+                Console.WriteLine("2 - загрузить информацию из json файлов,");
                 Console.WriteLine("3 - отстаньте, хочу выйти.");
                 Console.Write("> ");
                 switch (Console.ReadLine())
@@ -69,14 +74,6 @@ namespace VegetableStorage
             var reaction = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Gray;
             return reaction == "Y" || reaction == "y" || reaction == "yes" || reaction == "Yes";
-        }
-        
-        /// <summary>
-        /// Незамедлительно завершает работу программы.
-        /// </summary>
-        public static void ImmediatelyStop()
-        {
-            
         }
     }
 }

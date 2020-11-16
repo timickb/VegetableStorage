@@ -1,20 +1,22 @@
+using Newtonsoft.Json;
+
 namespace VegetableStorage.Entities
 {
     public class Operation
     {
-        public string Name { get;  }
+        public string Name { get; }
         public string Argument { get; }
         
-        public Operation(string name, string arg)
+        [JsonConstructor]
+        public Operation(string name, string argument)
         {
             Name = name;
-            Argument = arg;
+            Argument = argument;
         }
 
-        public Operation(string name)
+        public override string ToString()
         {
-            Name = name;
-            Argument = string.Empty;
+            return $"{Name} {Argument}";
         }
     }
 }

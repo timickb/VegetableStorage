@@ -104,7 +104,7 @@ namespace VegetableStorage
                 var userInput = Console.ReadLine()?.Trim().Split();
                 var action = userInput?.Length > 1
                     ? new Operation(userInput?[0], userInput?[1])
-                    : new Operation(userInput?[0]);
+                    : new Operation(userInput?[0], string.Empty);
 
                 if (userInput?[0] == Program.ExitCommand)
                 {

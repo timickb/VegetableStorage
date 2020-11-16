@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using VegetableStorage.Entities;
@@ -10,6 +11,7 @@ namespace VegetableStorage
     public class StorageLoader
     {
         private Storage _storage;
+        private List<Container> _containers;
         public StorageLoader()
         {
             RequestStorageDescription();
@@ -141,7 +143,7 @@ namespace VegetableStorage
                 }
             } while (true);
             // Закидываем контейнеры на склад.
-            _storage.Containers = list;
+            _containers = _containers;
         }
 
         private void RequestActionsList()
@@ -192,7 +194,27 @@ namespace VegetableStorage
             // Поочередно применяем каждое действие ко складу.
             foreach (var action in list)
             {
-                _storage.ApplyAction(action);
+                switch (action.Name)
+                {
+                    case "add":
+                    {
+                        foreach (var cont in _containers.Where(cont => cont.Id == action.Argument))
+                        {
+                            _storage.AddContainer(cont);
+                        }
+
+                        break;
+                    }
+                    case "remove":
+                    {
+                        foreach (var cont in _containers.Where(cont => cont.Id == action.Argument))
+                        {
+                            _storage.RemoveContainerById(cont.Id);
+                        }
+
+                        break;
+                    }
+                }
             }
         }
     }
