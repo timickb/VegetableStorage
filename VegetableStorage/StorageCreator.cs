@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using VegetableStorage.Entities;
 using VegetableStorage.Exceptions;
+using Action = VegetableStorage.Entities.Action;
 
 namespace VegetableStorage
 {
@@ -15,7 +16,7 @@ namespace VegetableStorage
     public class StorageCreator
     {
         private Storage _storage;
-        
+
         // Счетчик идентификаторов для контейнеров, инкрементируется при
         // каждом добавлении контейнера.
         private int _idCounter;
@@ -49,15 +50,15 @@ namespace VegetableStorage
             _storage = new Storage("default", capacity, price);
             Console.WriteLine("Склад успешно создан!");
             _idCounter = 0;
-            
+
             // Запрашиваем у пользователя действия.
             RequestActions();
-            
+
             // Вывод результата.
             var writer = new StorageWriter(_storage);
             writer.WriteToConsole();
             Console.WriteLine();
-            
+
             // Запрос на сохранение результата в файл.
             if (Program.RequestAgreement("Хотите записать результат в файл?"))
             {
@@ -101,30 +102,18 @@ namespace VegetableStorage
             {
                 Console.Write($"Действие #{actionIterator}> ");
                 var userInput = Console.ReadLine()?.Trim().Split();
-                if (userInput?[0] == "add")
-                {
-                    if (_storage.Fullness >= _storage.Capacity)
-                    {
-                        Console.WriteLine("(!) Склад уже содержит максимальное число контейнеров.");
-                        Console.WriteLine("При добавлении нового контейнера будет удален самый старый.");
-                        Console.WriteLine();
-                    }
-                    RequestAddOperation();
-                    actionIterator++;
-                }
-                else if (userInput?[0] == "remove" && userInput.Length >= 2)
-                {
-                    RequestRemoveOperation(userInput[1]);
-                    actionIterator++;
-                }
-                else if (userInput?[0] == Program.ExitCommand)
+                var action = userInput?.Length > 1
+                    ? new Action(userInput?[0], userInput?[1])
+                    : new Action(userInput?[0]);
+
+                if (userInput?[0] == Program.ExitCommand)
                 {
                     return;
                 }
-                else
-                {
-                    Console.WriteLine("Неизвестная команда или неверные аргументы.");
-                }
+
+                _storage.ApplyAction(action);
+                actionIterator++;
+                
             } while (true);
         }
 
@@ -144,7 +133,7 @@ namespace VegetableStorage
                 if (int.TryParse(input, out amount) && 1 <= amount && amount <= 20) break;
                 Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
             } while (true);
-            
+
             // Ввод информации о ящиках.
             var container = new Container(_idCounter.ToString());
             Console.WriteLine($"В каждой из следующих {amount} строк введите через пробел по два целых числа -");
@@ -175,18 +164,18 @@ namespace VegetableStorage
                     Console.WriteLine("Неверный ввод, повторите еще раз.");
                 } while (true);
             }
-            
+
             // Проверка рентабельности хранения контейнера.
             if (container.TotalValue <= _storage.Price)
             {
                 Console.WriteLine(
                     "К сожалению, хранение такого контейнера нерентабельно: ценность его содержимого " +
                     $"{container.TotalValue} тугриков, в то время как цена на хранение " +
-                    $"составляет {_storage.Price} тугриков." + 
+                    $"составляет {_storage.Price} тугриков." +
                     "Данный контейнер помещен на склад не будет.");
                 return;
             }
-            
+
             // Добавление нового контейнера.
             _storage.AddContainer(container);
             Console.WriteLine($"Контейнер успешно добавлен на склад, ему присвоен идентификатор {_idCounter}");
