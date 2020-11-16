@@ -6,6 +6,7 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="VegetableStorage" t="IncludeRecursive">
         <e p="Entities" t="Include">
+          <e p="Action.cs" t="Include" />
           <e p="Box.cs" t="Include" />
           <e p="Container.cs" t="Include" />
           <e p="Storage.cs" t="Include" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using VegetableStorage.Entities;
 using VegetableStorage.Exceptions;
 
@@ -51,13 +52,36 @@ namespace VegetableStorage
             
             // Запрашиваем у пользователя действия.
             RequestActions();
-            // Сохранение результата.
+            
+            // Вывод результата.
             var writer = new StorageWriter(_storage);
             writer.WriteToConsole();
             Console.WriteLine();
+            
+            // Запрос на сохранение результата в файл.
             if (Program.RequestAgreement("Хотите записать результат в файл?"))
             {
-                Console.WriteLine("Введите полный путь к файлу:");
+                do
+                {
+                    Console.WriteLine("Введите полный путь к файлу:");
+                    var path = Path.GetFullPath(Console.ReadLine() ?? string.Empty);
+                    try
+                    {
+                        writer.WriteToFile(path);
+                        Console.WriteLine("Информация успешно записана!");
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        Console.WriteLine("Ошибка при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine("Ошибка доступа при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                } while (true);
             }
         }
 
@@ -93,7 +117,7 @@ namespace VegetableStorage
                     RequestRemoveOperation(userInput[1]);
                     actionIterator++;
                 }
-                else if (userInput?[0] == "exit")
+                else if (userInput?[0] == Program.ExitCommand)
                 {
                     return;
                 }
@@ -116,7 +140,7 @@ namespace VegetableStorage
             do
             {
                 var input = Console.ReadLine();
-                if (input.Equals("exit")) return;
+                if (input == Program.ExitCommand) return;
                 if (int.TryParse(input, out amount) && 1 <= amount && amount <= 20) break;
                 Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
             } while (true);
@@ -131,10 +155,9 @@ namespace VegetableStorage
                 do
                 {
                     var userInput = Console.ReadLine()?.Trim().Split();
-                    if (userInput.Equals("exit")) return;
-                    int weight, price;
-                    if (userInput?.Length == 2 && int.TryParse(userInput[0], out weight) &&
-                        int.TryParse(userInput[1], out price) && 1 <= weight && 1 <= price && weight <= 100 &&
+                    if (userInput?[0] == Program.ExitCommand) return;
+                    if (userInput?.Length == 2 && int.TryParse(userInput[0], out var weight) &&
+                        int.TryParse(userInput[1], out var price) && 1 <= weight && 1 <= price && weight <= 100 &&
                         price <= 50)
                     {
                         try

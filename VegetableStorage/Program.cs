@@ -19,9 +19,10 @@ namespace VegetableStorage
         {
             do
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("===> Склад овощей <===");
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("Выберите опцию:");
                 Console.WriteLine("1 - ввести параметры склада в консоли,");
                 Console.WriteLine("2 - загрузить информацию из json файла,");
@@ -33,9 +34,10 @@ namespace VegetableStorage
                         new StorageCreator();
                         break;
                     case "2":
-                        Console.WriteLine();
+                        new StorageLoader();
                         break;
                     case "3":
+                    case ExitCommand:
                         Console.WriteLine("Всего доброго!");
                         return;
                     default:
@@ -67,6 +69,14 @@ namespace VegetableStorage
             var reaction = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Gray;
             return reaction == "Y" || reaction == "y" || reaction == "yes" || reaction == "Yes";
+        }
+        
+        /// <summary>
+        /// Незамедлительно завершает работу программы.
+        /// </summary>
+        public static void ImmediatelyStop()
+        {
+            
         }
     }
 }

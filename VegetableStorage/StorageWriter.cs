@@ -16,22 +16,7 @@ namespace VegetableStorage
 
         public void WriteToConsole()
         {
-            Console.WriteLine("Информация о складе:");
-            Console.WriteLine($"-> Число контейнеров: {_storage.Fullness}");
-            Console.WriteLine($"-> Цена хранения контейнера: {_storage.Price}");
-            Console.WriteLine($"-> Вместимость склада: {_storage.Capacity}");
-            Console.WriteLine("-> Контейнеры:");
-            foreach (var cont in _storage.Containers)
-            {
-                Console.WriteLine($"      {cont.Id}:");
-                Console.WriteLine($"      Суммарная масса ящиков: {cont.TotalWeight}");
-                Console.WriteLine($"      Суммарная ценность ящиков: {cont.TotalValue}");
-                Console.WriteLine($"      Ящики:");
-                foreach (var box in cont.Boxes)
-                {
-                    Console.WriteLine($"         {box.Weight} кг; {box.PriceForKilo} тугриков за кг.");
-                }
-            }
+            Console.WriteLine(_storage.ToString());
             
         }
 
@@ -46,11 +31,11 @@ namespace VegetableStorage
             }
             catch (UnauthorizedAccessException)
             {
-                Console.WriteLine("Невозможно записать информацию в заданный файл.");
+                throw new UnauthorizedAccessException();
             }
             catch (IOException)
             {
-               Console.WriteLine("Невозможно записать информацию в заданный файл."); 
+               throw new IOException();
             }
         }
     }

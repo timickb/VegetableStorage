@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using VegetableStorage.Exceptions;
 
 namespace VegetableStorage.Entities
@@ -11,7 +12,7 @@ namespace VegetableStorage.Entities
         public int Capacity { get; }
         public int Price { get; }
         public int Fullness => Containers.Count;
-        public List<Container> Containers { get; }
+        public List<Container> Containers { get; set; }
 
         public Storage(string name, int capacity, int price)
         {
@@ -53,5 +54,35 @@ namespace VegetableStorage.Entities
             throw new ContainerNotFoundException();
         }
 
+        public void ApplyAction(Action act)
+        {
+            if (act.Name == "add")
+            {
+                
+            }
+        }
+
+        public override string ToString()
+        {
+            var sep = Environment.NewLine;
+            var result = $"Информация о складе {Name}:" + sep;
+            result += $"-> Число контейнеров: {Fullness}" + sep;
+            result += $"-> Цена хранения контейнера: {Price}" + sep;
+            result += $"-> Вместимость склада: {Capacity}" + sep;
+            result += "-> Контейнеры:" + sep;
+            foreach (var cont in Containers)
+            {
+                result += $"      {cont.Id}:" + sep;
+                result += $"      Суммарная масса ящиков: {cont.TotalWeight}" + sep;
+                result += $"      Суммарная ценность ящиков: {cont.TotalValue}" + sep;
+                result += $"      Ящики:" + sep;
+                foreach (var box in cont.Boxes)
+                {
+                    result += $"         {box.Weight} кг; {box.PriceForKilo} тугриков за кг." + sep;
+                }
+            }
+
+            return result;
+        }
     }
 }
