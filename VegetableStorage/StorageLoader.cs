@@ -15,6 +15,36 @@ namespace VegetableStorage
             RequestStorageDescription();
             RequestContainersList();
             RequestActionsList();
+            
+            // Вывод результата.
+            var writer = new StorageWriter(_storage);
+            writer.WriteToConsole();
+            Console.WriteLine();
+            // Запрос на сохранение результата в файл.
+            if (Program.RequestAgreement("Хотите записать результат в файл?"))
+            {
+                do
+                {
+                    Console.WriteLine("Введите полный путь к файлу:");
+                    var path = Path.GetFullPath(Console.ReadLine() ?? string.Empty);
+                    try
+                    {
+                        writer.WriteToFile(path);
+                        Console.WriteLine("Информация успешно записана!");
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        Console.WriteLine("Ошибка при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine("Ошибка доступа при чтении файла/директории.");
+                        if (!Program.RequestAgreement("Повторить операцию?")) break;
+                    }
+                } while (true);
+            }
         }
 
         private void RequestStorageDescription()

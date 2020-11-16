@@ -39,10 +39,10 @@ namespace VegetableStorage
 
             int price;
 
-            Console.WriteLine("Укажите цену хранения одного контейнера в тугриках (от 1 до 400):");
+            Console.WriteLine("Укажите цену хранения одного контейнера в тугриках:");
             do
             {
-                if (int.TryParse(Console.ReadLine(), out price) && 1 <= price && price <= 400) break;
+                if (int.TryParse(Console.ReadLine(), out price) && 1 <= price) break;
                 Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
             } while (true);
 
@@ -115,88 +115,6 @@ namespace VegetableStorage
                 actionIterator++;
                 
             } while (true);
-        }
-
-        /// <summary>
-        /// Запрос создания нового контейнера
-        /// у пользователя.
-        /// </summary>
-        private void RequestAddOperation()
-        {
-            // Ввод числа ящиков.
-            Console.WriteLine("Введите количество ящиков, которые хотите поместить в новый контейнер (от 1 до 20):");
-            int amount;
-            do
-            {
-                var input = Console.ReadLine();
-                if (input == Program.ExitCommand) return;
-                if (int.TryParse(input, out amount) && 1 <= amount && amount <= 20) break;
-                Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
-            } while (true);
-
-            // Ввод информации о ящиках.
-            var container = new Container(_idCounter.ToString());
-            Console.WriteLine($"В каждой из следующих {amount} строк введите через пробел по два целых числа -");
-            Console.WriteLine("масса ящика в килограммах (от 1 до 100) и цена за килограмм в тугриках (от 1 до 50):");
-            for (var i = 0; i < amount; i++)
-            {
-                Console.Write($"Ящик #{i + 1}> ");
-                do
-                {
-                    var userInput = Console.ReadLine()?.Trim().Split();
-                    if (userInput?[0] == Program.ExitCommand) return;
-                    if (userInput?.Length == 2 && int.TryParse(userInput[0], out var weight) &&
-                        int.TryParse(userInput[1], out var price) && 1 <= weight && 1 <= price && weight <= 100 &&
-                        price <= 50)
-                    {
-                        try
-                        {
-                            container.AddBox(new Box(weight, price));
-                        }
-                        catch (BoxAddException)
-                        {
-                            Console.WriteLine("В контейнере не осталось места для такого ящика :(");
-                        }
-
-                        break;
-                    }
-
-                    Console.WriteLine("Неверный ввод, повторите еще раз.");
-                } while (true);
-            }
-
-            // Проверка рентабельности хранения контейнера.
-            if (container.TotalValue <= _storage.Price)
-            {
-                Console.WriteLine(
-                    "К сожалению, хранение такого контейнера нерентабельно: ценность его содержимого " +
-                    $"{container.TotalValue} тугриков, в то время как цена на хранение " +
-                    $"составляет {_storage.Price} тугриков." +
-                    "Данный контейнер помещен на склад не будет.");
-                return;
-            }
-
-            // Добавление нового контейнера.
-            _storage.AddContainer(container);
-            Console.WriteLine($"Контейнер успешно добавлен на склад, ему присвоен идентификатор {_idCounter}");
-            _idCounter++;
-        }
-
-        /// <summary>
-        /// Запрос удаления контейнера.
-        /// </summary>
-        /// <param name="id">Идентификатор контейнера.</param>
-        private void RequestRemoveOperation(string id)
-        {
-            try
-            {
-                _storage.RemoveContainerById(id);
-                Console.WriteLine("Контейнер успешно удален.");
-            }
-            catch (ContainerNotFoundException e)
-            {
-                Console.WriteLine(e.Message);
-            }
         }
     }
 }

@@ -70,7 +70,7 @@ namespace VegetableStorage.Entities
         {
             if (act.Name == "add")
             {
-                if (act.Argument != string.Empty && act.Argument.Length > 10)
+                if (act.Argument != string.Empty && act.Argument.Length > 64)
                 {
                     Console.WriteLine(
                         "(!) Недопустимая длина идентификатора. Будет присовен идентификатор по умолчанию.");
@@ -85,20 +85,20 @@ namespace VegetableStorage.Entities
 
                 // Ввод числа ящиков.
                 Console.WriteLine(
-                    "Введите количество ящиков, которые хотите поместить в новый контейнер (от 1 до 20):");
+                    "Введите количество ящиков, которые хотите поместить в новый контейнер:");
                 int amount;
                 do
                 {
                     var input = Console.ReadLine();
                     if (input == Program.ExitCommand) return;
-                    if (int.TryParse(input, out amount) && 1 <= amount && amount <= 20) break;
+                    if (int.TryParse(input, out amount) && 0 <= amount) break;
                     Console.WriteLine("Недопустимое значение, попробуйте еще раз.");
                 } while (true);
 
                 // Если был указан идентификатор в качестве аргумента - используем его,
                 // в противном случае присваиваем идентификатор по умолчанию.
                 Container container;
-                if (act.Argument == string.Empty || act.Argument.Length > 10)
+                if (act.Argument == string.Empty || act.Argument.Length > 64)
                 {
                     container = new Container(_idCounter.ToString());
                 }
@@ -109,8 +109,7 @@ namespace VegetableStorage.Entities
 
                 // Ввод информации о ящиках.
                 Console.WriteLine($"В каждой из следующих {amount} строк введите через пробел по два целых числа -");
-                Console.WriteLine(
-                    "масса ящика в килограммах (от 1 до 100) и цена за килограмм в тугриках (от 1 до 50):");
+                Console.WriteLine("масса ящика в килограммах и цена за килограмм в тугриках:");
                 for (var i = 0; i < amount; i++)
                 {
                     Console.Write($"Ящик #{i + 1}> ");
@@ -119,8 +118,7 @@ namespace VegetableStorage.Entities
                         var userInput = Console.ReadLine()?.Trim().Split();
                         if (userInput?[0] == Program.ExitCommand) return;
                         if (userInput?.Length == 2 && int.TryParse(userInput[0], out var weight) &&
-                            int.TryParse(userInput[1], out var price) && 1 <= weight && 1 <= price && weight <= 100 &&
-                            price <= 50)
+                            int.TryParse(userInput[1], out var price) && 1 <= weight && 1 <= price)
                         {
                             try
                             {
