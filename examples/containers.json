@@ -1,0 +1,26 @@
+[
+    {
+        "Id": "peergrade_dostal",
+        "MaxWeight": 400,
+        "Boxes": [
+            {
+                "Weight": 18,
+                "PriceForKilo": 30
+            },
+            {
+                "Weight": 11,
+                "PriceForKilo": 30
+            }
+        ]
+    },
+    {
+        "Id": "somecont",
+        "MaxWeight": 600,
+        "Boxes": [
+            {
+                "Weight": 1,
+                "PriceForKilo": 10
+            }
+        ]
+    }
+]

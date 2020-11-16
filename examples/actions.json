@@ -1,0 +1,22 @@
+[
+    {
+        "Name": "add",
+        "Argument": "somecont"
+    },
+    {
+        "Name": "add",
+        "Argument": "peergrade_dostal"
+    },
+    {
+        "Name": "add",
+        "Argument": "non_existing_container"
+    },
+    {
+        "Name": "incorrect_command",
+        "Argument": "ненавижу_пиргрейд"
+    },
+    {
+        "Name": "remove",
+        "Argument": "somecont"
+    }
+]
